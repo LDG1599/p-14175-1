@@ -63,7 +63,7 @@ export default function Page() {
           name="content"
           placeholder="내용"
         />
-        <button className="border p-2 rounded" type="submit">
+        <button className="border p-2 rounded cursor-pointer" type="submit">
           저장
         </button>
       </form>
