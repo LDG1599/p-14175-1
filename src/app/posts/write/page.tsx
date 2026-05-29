@@ -1,6 +1,10 @@
 "use client";
 
+import { apiFetch } from "@/lib/backend/client";
+import { useRouter } from "next/navigation";
+
 export default function Page() {
+    const router = useRouter();
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -28,19 +32,18 @@ export default function Page() {
     }
   
 
-    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/posts`, {
+    apiFetch(`/api/v1/posts`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json; charset=utf-8",
-        },
+
         body: JSON.stringify({
           title: titleInput.value,
           content: contentTextarea.value,
         }),
       })
-        .then((response) => response.json())
         .then((data) => {
           alert(data.msg);
+
+          router.replace(`/posts/${data.data.id}`);
         });
 };
 
